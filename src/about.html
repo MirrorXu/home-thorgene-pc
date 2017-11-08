@@ -1,13 +1,298 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>索真-关于我们</title>
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>关于索真</title>
+    <link rel="stylesheet" href="font/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/about.css">
+
+    <script src="lib/jquery3.2.1.js"></script>
+    <script src="js/getProAll.js"></script>
 </head>
 <body>
-<div id="app">
 
+
+<div id="nav" class="nav">
+    <div class="banxin clearfix">
+        <a class="logoBox" href="./index.html">
+        </a>
+        <ul id="nav-cotent" class="clearfix">
+            <li><a href="./index.html">首页</a></li>
+            <li id="linchuang">临床服务</li>
+            <li id="keyan">科研服务</li>
+            <li id="dazong">大众健康</li>
+            <li><a href="./news.html">新闻动态</a></li>
+            <li><a href="./about.html">关于我们</a></li>
+        </ul>
+        <div class="hotCall">
+            <i class="fa fa-phone"></i>热线咨询服务：<span class="telNum">400-808-8978</span>
+        </div>
+    </div>
+</div>
+<!-----------start   nav-slider  ------------------>
+<div id="navSlider">
+    <!--大众健康navSlider-->
+    <div id="dazongSlider" class="navSilder">
+        <div class="banxin">
+            <div class="content clearfix">
+                <template v-for="v in dazong.children" >
+                    <a v-for="v in v.children" :href="baseUrl+v.id">{{ v.text }}</a>
+                </template>
+            </div>
+        </div>
+    </div>
+    <!--科研navSlider-->
+    <div id="keyanSlider" class="navSilder">
+        <div class="banxin">
+            <div class="content clearfix">
+                <template v-for="v in keyan.children" >
+                    <a v-for="v in v.children" :href="baseUrl+v.id">{{ v.text }}</a>
+                </template>
+            </div>
+        </div>
+    </div>
+    <!--临床navSlider-->
+    <div id="linchuangSlider" class="navSilder">
+        <div class="banxin">
+            <div class="itemBars">
+                <span :class="{'selectedNarSliderItem':(v.text)===tempLinchuang[0].text}" v-for="v in linchuang.children" @click="changTempLinchuang(v.text)">{{ v.text }}</span>
+            </div>
+            <div class="item-content clearfix">
+                <template v-for="v in tempLinchuang[0].children">
+
+                    <a class="item-content-item" v-for="v in v.children"  :href="baseUrl+v.id">{{ v.text }}</a>
+
+                </template>
+            </div>
+        </div>
+    </div>
+</div>
+<!-----------end    nav-slider  ------------------>
+
+
+<div class="pageHeader">
+    <img src="imgs/page-header/news-pageHeader.png" alt="">
 </div>
 
-<script type="text/javascript" src="js/about.js"></script></body>
+<div class="slider-navBar">
+    <div class="banxin">
+        <a href="./index.html">首页</a> / 关于我们
+    </div>
+</div>
+<div class="about-content">
+    <div class="banxin clearfix">
+        <div class="intro clearfix">
+            <div class="intro-img">
+                <img src="imgs/about/1.png" alt="">
+            </div>
+            <div class="intro-text">
+                <h2 class="intro-text-title">
+                    关于我们
+                </h2>
+                <p>
+                    索真医学由美国海归教授、基因检测专家、基因组大数据分析专家和基因医学解读专家联合创建。索真医学拥有临床细胞分子遗传学基因检测技术和基因数据分析平台，致力于打造具有国际前沿水平的、基于医学遗传学和基因组大数据分析的基因检测实验室，重点开展肿瘤精准用药指导、遗传病精准诊断、药物代谢基因检测和大健康基因检测项目，为肿瘤患者、遗传病患者、需要用药指导的人群以及关爱个人健康的人群提供准确可靠的基因数据和医学解读。
+                </p>
+                <p>
+                    在医学健康领域，索真医学立足于核心海内外人才团队，汇集了优秀的基因组学及医学专家，有多学科人才组成的合理技术梯队，并已在肿瘤个体化诊疗、遗传病基因检测、药物代谢基因检测和大众健康基因检测等方向形成了优秀的产品体系，推出了包括无创肿瘤基因检测、肿瘤精准用药基因检测、遗传病基因检测、药物代谢基因检测在内的一系列临床应用项目。
+                </p>
+                <p>
+                    在医学科研服务领域，索真医学致力于提供基因组学、转录组学和表观遗传学等多组学产品和服务，为人类重大疾病基础研究提供优秀的技术解决方案。
+                </p>
+                <p>
+                    目前索真医学已与国内多家顶级医院、国内外高等院校和科研机构达成合作，如北京协和医院、北京肿瘤医院、301医院、302医院、航天中心医院等。以北京协和医院为例，目前与病理科、肿瘤内科、妇产科、B超科、肝外科等都建立了良好的合作关系，公司的技术水平和服务质量得到合作伙伴的高度认可和一致好评。
+                </p>
+            </div>
+        </div>
+
+        <div class="advan">
+            <h2 class="title">技术优势</h2>
+            <div class="advan-items">
+                <span v-for="v in advan" class="advan-item" :class="{'selectedNarSliderItem': tempAdvan[0].name == v.name }" @click="changeTempAdvan(v.name)">{{ v.name }}</span>
+            </div>
+            <div class="advan-show clearfix" v-for="v in tempAdvan">
+                <img class="advan-show-img" :src="v.img" :alt="v.title">
+                <div class="advan-show-text">
+                    <h3>{{ v.title}}</h3>
+                    <p>{{ v.text }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="about-professor">
+        <div class="banxin">
+            <h2 class="title">专家团队</h2>
+        </div>
+        <div class="professor-show">
+            <ul class="banxin professor-show-items clearfix">
+                <li v-for=" v in professor" @click="changeTempProfessor(v.name)">
+                    <div class="mask-box " :class="{'bgBlue':tempProfessor[0].name == v.name }"></div>
+                    <img :src="v.img" :alt="v.name">
+                    <h3>{{ v.name }}</h3>
+                    <p>{{ v.title }}</p>
+                </li>
+            </ul>
+        </div>
+        <div class=" professor-show-box" >
+            <div class="banxin" v-for=" v  in  tempProfessor ">
+                <h3>{{ v.name }}</h3>
+                <p>{{ v.text }}</p>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<div id="footer">
+    <div class="banxin">
+        <div class="contact-us">
+            <div class="item1">
+                <span class="phone-icon">
+                <span class="fa fa-phone "></span>
+                </span>
+                <h3>400 - 808 - 8978</h3>
+                <p>周一至周五 9:00-18:00</p>
+            </div>
+            <div class="item2">
+                <a class="button-contact" href="#">
+                    在线咨询
+                </a>
+            </div>
+
+            <div class="item3">
+                <span class="address-icon">
+                <span class="fa fa-map-marker"></span>
+                </span>
+
+                <p>
+                    北京市经济技术开发区科创六街
+                </p>
+                <p> &nbsp; &nbsp; &nbsp; &nbsp;88号生物医药园A1-2层
+                </p>
+            </div>
+        </div>
+        <div class="about-us">
+            <h2>关于我们</h2>
+            <ul>
+                <li><a href="#">公司简介</a></li>
+            </ul>
+        </div>
+
+        <div class="news">
+            <h2>新闻中心</h2>
+            <ul>
+                <li><a href="#">公司新闻</a></li>
+            </ul>
+        </div>
+        <div class="service">
+            <h2>服务支持</h2>
+            <ul>
+                <li><a href="#">技术支持</a></li>
+                <li><a href="#">帮助中心</a></li>
+            </ul>
+        </div>
+        <div class="weixin">
+            <h2>微信公众号</h2>
+            <img src="imgs/common/weixin.jpg" alt="">
+        </div>
+    </div>
+</div>
+
+<div id="bottom">
+    <p>北京索真医学检验所有限公司 &nbsp;&nbsp; 索真（北京）医学科技有限公司  &nbsp;&nbsp; &nbsp;&nbsp;<span>copyright &copy; 2017,索真,all rights reserved. </span> </p>
+</div>
+
+<script src="lib/vue.js"></script>
+<script src="js/nav.js"></script>
+<script>
+    var aboutApp = new Vue({
+        el:'.about-content',
+        data:{
+            tempAdvan:[{
+                name:'全液体肿瘤活检技术',
+                title:'超高灵敏度的全液体肿瘤活检',
+                text:'作为超高灵敏度的全液体肿瘤活检（血液，尿液，胸腹水，脑脊液等）技术服务商， 循环肿瘤DNA检测灵敏度远高于业界灵敏度水平。',
+                img:'imgs/about/01-1.png'
+            }],
+            advan:[
+                {
+                    name:'全液体肿瘤活检技术',
+                    title:'超高灵敏度的全液体肿瘤活检',
+                    text:'作为超高灵敏度的全液体肿瘤活检（血液，尿液，胸腹水，脑脊液等）技术服务商， 循环肿瘤DNA检测灵敏度远高于业界灵敏度水平。',
+                    img:'imgs/about/01-1.png'
+                },
+                {
+                    name:'国际标准的临床检验实验室',
+                    title:'第一家按照最新标准通过卫计委审批',
+                    text:'索真医学检验所是第一家按照最新标准通过卫计委审批并获得医疗机构执业许可证的医学检验所。',
+                    img:'imgs/about/01-2.png'
+                },
+                {
+                    name:'智能化精准数据分析平台',
+                    title:'多维数据健康管理系统平台',
+                    text:'国内首家专注于发掘生命数据价值，结合生物检测，临 床医学与大数据分析技术构建的个人多维数据健康管理 系统平台，拥有多项国际领先的专利技术。',
+                    img:'imgs/about/01-3.png'
+                }
+
+            ],
+            tempProfessor:[
+                {
+                    name:'潘多佳',
+                    img:'imgs/professor/1.png',
+                    title:'美国加州大学（UCLA）博士',
+                    text:'美国加州大学（UCLA）博士，美国加州大学（UC Berkeley）大学博士后。现为美国UT Southwest 医学中心生理系教授，系主任。美国霍华德休斯医学研究所研究员。国际肿瘤研究领域权威，开创了HIPPO 基因通路在肿瘤中的功能研究。'
+                }
+            ],
+            professor:[
+                {
+                    name:'潘多佳',
+                    img:'imgs/professor/1.png',
+
+                    title:'美国加州大学（UCLA）博士',
+                    text:'美国加州大学（UCLA）博士，美国加州大学（UC Berkeley）大学博士后。现为美国UT Southwest 医学中心生理系教授，系主任。美国霍华德休斯医学研究所研究员。国际肿瘤研究领域权威，开创了HIPPO 基因通路在肿瘤中的功能研究。'
+                },
+                {
+                    name:'张建民',
+
+                    title:'“协和学者”特聘教授、博士生导师。',
+                    img:'imgs/professor/2.png',
+                    text:'中国医学科学院基础医学研究所/北京协和医学院基础学院免疫学系教授,“协和学者”特聘教授、博士生导师。'
+                },
+                {
+                    name:'陈谦',
+                    title:'美国约翰霍普金斯大学博士后',
+                    img:'imgs/professor/3.png',
+                    text:'美国印第安纳大学医学院医学与分子遗传学系博士，美国约翰霍普金斯大学分子生物学和遗传学博士后。为中美两国基因检测的科研和临床应用做出了杰出的贡献。'
+                },
+                {
+                    name:'刘泓',
+                    title:'中科院计算所博士',
+                    img:'imgs/professor/4.png',
+                    text:'中科院计算所博士。创立天方创新之前就职于中国科学院计算技术研究所，专注于大数据、云计算与生物信息领域，其研究成果已经应用在Facebook、阿里集团等知名企业。'
+                }
+
+            ]
+        }
+        ,
+        methods:{
+            changeTempAdvan:function (text) {
+                this.tempAdvan = this.advan.filter(function (v , i ) {
+                    return text === v.name
+                })
+            },
+            changeTempProfessor:function (text) {
+                this.tempProfessor = this.professor.filter(function (v , i ) {
+                    return text === v.name
+                })
+            }
+        }
+    })
+</script>
+
+</body>
+</html>
 </html>

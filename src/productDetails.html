@@ -1,13 +1,228 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>索真-产品详情</title>
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>产品详情</title>
+    <link rel="stylesheet" href="font/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/news-product-details.css">
+
+    <script src="lib/jquery3.2.1.js"></script>
+    <script src="js/getProAll.js"></script>
 </head>
 <body>
-<div id="app">
+
+<div id="nav" class="nav">
+    <div class="banxin clearfix">
+        <a class="logoBox" href="./index.html">
+        </a>
+        <ul id="nav-cotent" class="clearfix">
+            <li><a href="./index.html">首页</a></li>
+            <li id="linchuang">临床服务</li>
+            <li id="keyan">科研服务</li>
+            <li id="dazong">大众健康</li>
+            <li><a href="./news.html">新闻动态</a></li>
+            <li><a href="./about.html">关于我们</a></li>
+        </ul>
+        <div class="hotCall">
+            <i class="fa fa-phone"></i>热线咨询服务：<span class="telNum">400-808-8978</span>
+        </div>
+    </div>
+</div>
+<!-----------start   nav-slider  ------------------>
+<div id="navSlider">
+    <!--大众健康navSlider-->
+    <div id="dazongSlider" class="navSilder">
+        <div class="banxin">
+            <div class="content clearfix">
+                <template v-for="v in dazong.children" >
+                    <a v-for="v in v.children" :href="baseUrl+v.id">{{ v.text }}</a>
+                </template>
+            </div>
+        </div>
+    </div>
+    <!--科研navSlider-->
+    <div id="keyanSlider" class="navSilder">
+        <div class="banxin">
+            <div class="content clearfix">
+                <template v-for="v in keyan.children" >
+                    <a v-for="v in v.children" :href="baseUrl+v.id">{{ v.text }}</a>
+                </template>
+            </div>
+        </div>
+    </div>
+    <!--临床navSlider-->
+    <div id="linchuangSlider" class="navSilder">
+        <div class="banxin">
+            <div class="itemBars">
+                <span :class="{'selectedNarSliderItem':(v.text)===tempLinchuang[0].text}" v-for="v in linchuang.children" @click="changTempLinchuang(v.text)">{{ v.text }}</span>
+            </div>
+            <div class="item-content clearfix">
+                <template v-for="v in tempLinchuang[0].children">
+
+                    <a class="item-content-item" v-for="v in v.children"  :href="baseUrl+v.id">{{ v.text }}</a>
+
+                </template>
+            </div>
+        </div>
+    </div>
+</div>
+<!-----------end    nav-slider  ------------------>
+
+<div id="productApp" class="productDetailsBox">
+
+    <div class="pageHeader" style="background-image: url(imgs/page-header/productDetails-pageHeader.png)">
+        <div class="mask">
+
+        </div>
+        <div class="banxin">
+            <h1>{{ productDetails.product_name || '未上传产品名称' }}</h1>
+        </div>
+    </div>
+
+
+    <div class="product-box">
+        <div v-if="productDetails.product_content" class="banxin UE_style-1"  v-html="productDetails.product_content">
+
+        </div>
+        <div v-else class="banxin">
+            <div class="loadingBox">
+                <i class="fa fa-spinner fa-spin" aria-hidden="true"></i>
+            </div>
+        </div>
+    </div>
 
 </div>
 
-<script type="text/javascript" src="js/productDetails.js"></script></body>
+<div id="footer">
+    <div class="banxin">
+        <div class="contact-us">
+            <div class="item1">
+                <span class="phone-icon">
+                <span class="fa fa-phone "></span>
+                </span>
+                <h3>400 - 808 - 8978</h3>
+                <p>周一至周五 9:00-18:00</p>
+            </div>
+            <div class="item2">
+                <a class="button-contact" href="#">
+                    在线咨询
+                </a>
+            </div>
+
+            <div class="item3">
+                <span class="address-icon">
+                <span class="fa fa-map-marker"></span>
+                </span>
+
+                <p>
+                    北京市经济技术开发区科创六街
+                </p>
+                <p> &nbsp; &nbsp; &nbsp; &nbsp;88号生物医药园A1-2层
+                </p>
+            </div>
+        </div>
+        <div class="about-us">
+            <h2>关于我们</h2>
+            <ul>
+                <li><a href="#">公司简介</a></li>
+            </ul>
+        </div>
+
+        <div class="news">
+            <h2>新闻中心</h2>
+            <ul>
+                <li><a href="#">公司新闻</a></li>
+            </ul>
+        </div>
+        <div class="service">
+            <h2>服务支持</h2>
+            <ul>
+                <li><a href="#">技术支持</a></li>
+                <li><a href="#">帮助中心</a></li>
+            </ul>
+        </div>
+        <div class="weixin">
+            <h2>微信公众号</h2>
+            <img src="imgs/common/weixin.jpg" alt="">
+        </div>
+    </div>
+</div>
+
+<div id="bottom">
+    <p>北京索真医学检验所有限公司 &nbsp;&nbsp; 索真（北京）医学科技有限公司  &nbsp;&nbsp; &nbsp;&nbsp;<span>copyright &copy; 2017,索真,all rights reserved. </span> </p>
+</div>
+
+
+
+<script src="lib/swiper/swiper.jquery.js"></script>
+<script src="lib/vue.js"></script>
+<script src="js/nav.js"></script>
+<script>
+    var productDetails = {
+        "product_id": "pid_0065",
+        "product_name": "全基因组甲基化",
+        "product_isparent": "T",
+        "product_pid": "pid_0057",
+        "product_isshow": "T",
+        "product_status": "",
+        "product_content": "<h2><span style=\"font-family: arial, helvetica, sans-serif; font-size: 24px;\">产品简介</span></h2><p><span style=\"font-family: 宋体; font-size: 14px;\">&nbsp; &nbsp;</span><span style=\"font-family: arial, helvetica, sans-serif; font-size: 16px;\"><strong><span style=\"font-family: arial, helvetica, sans-serif;\">全基因组甲基化</span></strong><span style=\"font-family: arial, helvetica, sans-serif;\">是将重亚硫酸盐处理方法和Illumina HiSeq高通量测序平台相结合，在全基因组水平进行高精准甲基化研究。单碱基分辨率，精确分析每一个胞嘧啶的甲基化状态，构建精细的全基因组DNA甲基化图谱。</span></span><span style=\"font-family: 宋体; font-size: 14px;\">&nbsp;</span></p><p style=\"text-align:justify;text-justify:inter-ideograph\"><span style=\"font-family: 宋体; font-size: 14px;\">&nbsp; &nbsp;<span style=\"font-family: arial, helvetica, sans-serif; font-size: 16px;\">产品优势：</span></span></p><ul class=\" list-paddingleft-2\" style=\"list-style-type: disc;\"><li><p>领先的建库技术，50ng超低起始量建库。</p></li><li><p>实验设计科学、超高建库成功率。</p></li><li><p>可定制化实验方案及生物信息分析。</p></li><li><p>采用主流的生物信息分析软件，保证结果精准</p></li></ul><p><span style=\"font-family: 宋体; font-size: 14px;\"></span><br/></p><p style=\"text-align: center;\"><span style=\"font-family: arial, helvetica, sans-serif; font-size: 24px;\"></span>&nbsp;</p><p><br/></p><p style=\"text-align: center;\"><img src=\"/img/utf8-jsp/jsp/upload/image/20170831/1504165386260030346.png\" title=\"1504165386260030346.png\" alt=\"image.png\" width=\"546\" height=\"430\"/></p><h2 style=\"text-align: justify;\"><span style=\"font-family: arial, helvetica, sans-serif; font-size: 24px;\">技术流程</span></h2><p style=\"text-align:justify;text-justify:inter-ideograph\"><span style=\"font-family: arial, helvetica, sans-serif; font-size: 24px;\"><br/></span></p><p style=\"text-align: center;\"><img src=\"/img/utf8-jsp/jsp/upload/image/20170829/1503986284308069211.png\" title=\"1503986284308069211.png\" alt=\"image.png\"/></p><p style=\"text-align: center;\"><span style=\"font-family: arial, helvetica, sans-serif; font-size: 24px;\"><img src=\"/img/utf8-jsp/jsp/upload/image/20170829/1503984876936075670.png\" title=\"1503984876936075670.png\" alt=\"image.png\"/></span></p><h2 style=\"text-align: justify;\"><span style=\"font-size: 24px; font-family: arial, helvetica, sans-serif;\">技术参数</span><span style=\"font-size: 24px; font-family: arial, helvetica, sans-serif;\">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span><br/></h2><p>样本要求：DNA</p><p>样本总量：≥5ug</p><p>测序平台及策略：illumina 测序平台</p><p>数据量：平均测序深度30×</p><p>项目周期：60天</p><h2 style=\"text-align: justify;\"><span style=\"font-size: 24px; font-family: arial, helvetica, sans-serif;\">常见问题</span><span style=\"font-size: 24px; font-family: arial, helvetica, sans-serif;\">&nbsp; &nbsp;&nbsp;</span><span style=\"font-family: arial, helvetica, sans-serif;\">&nbsp;</span><br/><span style=\"font-family: arial, helvetica, sans-serif; font-size: 24px;\"></span></h2><p>Q：WGBS推荐数据量多少？需要生物学重复吗？</p><p>A：通常WGBS甲基化建议测序深度为30X，生物学重复为两个。如果研究同类细胞的需要5-15X测序深度，如果需要研究区域较短的DMR需要15X以上的测序深度，如果想分析区域较长的DMR测序深度达到1-2X即可。建议如果要分析DMR至少需要两个生物学重复。</p><p>Q：全基因组甲基化测序有哪些优势？&nbsp;</p><p>A：在全基因组水平，单碱基分辨率检出甲基化位点，不仅能够高精度发现CpG岛等常见区域的甲基化水平的变化，还能够分 析gene body区，基因间区等区域的甲基化水平的差异，分析甲基化对染色体的状态以及基因结构变化的影响，从多维度分析解决生物学问题。</p><p style=\"white-space: normal; text-align: justify;\"><span style=\"font-family: arial, helvetica, sans-serif; font-size: 16px;\"></span><br/></p><p style=\"text-align:justify;text-justify:inter-ideograph\"><span style=\"font-family: arial, helvetica, sans-serif; font-size: 24px;\"><br/></span><br/></p><p style=\"text-align:justify;text-justify:inter-ideograph\"><span style=\"font-family: arial, helvetica, sans-serif; font-size: 24px;\"></span><br/></p><p style=\"text-align:justify;text-justify:inter-ideograph\"><span style=\"font-family: arial, helvetica, sans-serif; font-size: 24px;\"><br/></span></p><p style=\"text-align:justify;text-justify:inter-ideograph\"><span style=\"font-family: arial, helvetica, sans-serif; font-size: 24px;\"><br/></span></p><p style=\"text-align:justify;text-justify:inter-ideograph\"><span style=\"font-family: arial, helvetica, sans-serif; font-size: 24px;\"><br/></span></p><p style=\"text-align:justify;text-justify:inter-ideograph\"><span style=\"font-family: arial, helvetica, sans-serif; font-size: 24px;\"><br/></span></p><p style=\"text-align:justify;text-justify:inter-ideograph\"><span style=\"font-family: arial, helvetica, sans-serif; font-size: 24px;\"><br/></span></p><p style=\"text-align:justify;text-justify:inter-ideograph\"><span style=\"font-family: arial, helvetica, sans-serif; font-size: 24px;\"><br/></span></p><p style=\"text-align:justify;text-justify:inter-ideograph\"><span style=\"font-family: arial, helvetica, sans-serif; font-size: 24px;\"><br/></span></p><p><br/></p>",
+        "product_createtime": null,
+        "product_author": "",
+        "product_information": "是将重亚硫酸盐处理方法和Illumina HiSeq高通量测序平台相结合，在全基因组水平进行高精准甲基化研究",
+        "product_image": "/img/utf8-jsp/jsp/upload/image/product/20170830171722530.jpg",
+        "lists": null,
+        "parentName": "科研 > 全基因组甲基化 > "
+    };
+
+
+    var productApp = new Vue({
+        el:'#productApp',
+        data:{
+            productDetails:''
+        },
+        mounted:function () {
+            var _this = this;
+            $.ajax({
+                url:'/thorgeneweb/thorgeneweb_product/thorgeneweb_product!findById.action',
+                data:{
+                    product_id:window.location.href.split('?')[1].split('=')[1]
+                },
+                async:false, // 同步数据请求
+                dataType:'json',
+                success:function (data) {
+                    if(data){
+                        _this.productDetails = data;
+                        console.log( 'ajax请求产品详情成功' );
+                    }else{
+                        alert('服务器繁忙，请稍后再试！');
+                    }
+                },
+                error:function (data) {
+                    console.log('ajax产品详情失败：',data );
+                    _this.productDetails = productDetails;
+                }
+            });
+        }
+    });
+
+
+    window.onload = function () {
+
+        $('.UE_style-1').find('*').attr({
+            width:'',
+            valign:'',
+            class:'',
+            style:''
+        });
+
+        $('.UE_style-1').find('table').addClass('table table-bordered table-responsive');
+
+    }
+</script>
+
+</body>
 </html>

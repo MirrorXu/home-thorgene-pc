@@ -1,38 +1,274 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>欢迎访问索真医学</title>
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="font/css/font-awesome.min.css">
     <link href="lib/swiper/swiper.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/common.css">
     <link rel="stylesheet" href="css/index.css">
+
+    <script src="lib/jquery3.2.1.js"></script>
+    <script src="js/getProAll.js"></script>
 </head>
 <body>
-<nav>
-    <ul>
-        <li>首页</li>
-        <li>产品中心</li>
-        <li>新闻动态</li>
-        <li>关于索真</li>
-        <li>联系我们</li>
-    </ul>
-</nav>
-<div id="app" class="swiper-container">
+
+
+<div id="nav" class="nav">
+    <div class="banxin clearfix">
+        <a class="logoBox" href="./index.html">
+        </a>
+        <ul id="nav-cotent" class="clearfix">
+           <li><a href="./index.html">首页</a></li>
+           <li id="linchuang">临床服务</li>
+           <li id="keyan">科研服务</li>
+           <li id="dazong">大众健康</li>
+           <li><a href="./news.html">新闻动态</a></li>
+           <li><a href="./about.html">关于我们</a></li>
+        </ul>
+        <div class="hotCall">
+            <i class="fa fa-phone"></i>热线咨询服务：<span class="telNum">400-808-8978</span>
+        </div>
+    </div>
+</div>
+<!-----------start   nav-slider  ------------------>
+<div id="navSlider">
+    <!--大众健康navSlider-->
+    <div id="dazongSlider" class="navSilder">
+        <div class="banxin">
+            <div class="content clearfix">
+                <template v-for="v in dazong.children" >
+                    <a v-for="v in v.children" :href="baseUrl+v.id">{{ v.text }}</a>
+                </template>
+            </div>
+        </div>
+    </div>
+    <!--科研navSlider-->
+    <div id="keyanSlider" class="navSilder">
+        <div class="banxin">
+            <div class="content clearfix">
+                <template v-for="v in keyan.children" >
+                    <a v-for="v in v.children" :href="baseUrl+v.id">{{ v.text }}</a>
+                </template>
+            </div>
+        </div>
+    </div>
+    <!--临床navSlider-->
+    <div id="linchuangSlider" class="navSilder">
+        <div class="banxin">
+            <div class="itemBars">
+                <span :class="{'selectedNarSliderItem':(v.text)===tempLinchuang[0].text}" v-for="v in linchuang.children" @click="changTempLinchuang(v.text)">{{ v.text }}</span>
+            </div>
+            <div class="item-content clearfix">
+                <template v-for="v in tempLinchuang[0].children">
+
+                    <a class="item-content-item" v-for="v in v.children"  :href="baseUrl+v.id">{{ v.text }}</a>
+
+                </template>
+            </div>
+        </div>
+    </div>
+</div>
+<!-----------end    nav-slider  ------------------>
+
+
+<div id="bannar">
     <div class="swiper-wrapper">
-        <div class="swiper-slide" >Slide 1</div>
-        <div class="swiper-slide" >Slide 2</div>
-        <div class="swiper-slide" >Slide 3</div>
+        <img class="swiper-slide" src="imgs/index-bannar/banner/banner1.png" alt="">
+        <img class="swiper-slide" src="imgs/index-bannar/banner/banner2.png" alt="">
+        <img class="swiper-slide" src="imgs/index-bannar/banner/banner3.png" alt="">
+        <img class="swiper-slide" src="imgs/index-bannar/banner/banner4.png" alt="">
     </div>
     <!-- 如果需要分页器 -->
     <div class="swiper-pagination"></div>
-
-    <!-- 如果需要导航按钮 -->
-    <!--<div class="swiper-button-prev"></div>-->
-    <!--<div class="swiper-button-next"></div>-->
-
-    <!-- 如果需要滚动条 -->
-    <!--<div class="swiper-scrollbar"></div>-->
 </div>
-<script src="lib/jquery3.2.1.js"></script>
+
+<div id="product">
+    <div class="banxin">
+        <ul class="clearfix">
+            <li class="proItem"><a href="./products.html?id=pid_001#pid_004" ><div></div><h2>肿瘤基因检测</h2></a></li>
+            <li class="proItem"><a href="./products.html?id=pid_001#pid_005" ><div></div><h2>遗传病基因检测</h2></a></li>
+            <li class="proItem"><a href="./products.html?id=pid_001#pid_006" ><div></div><h2>药物代谢基因检测</h2></a></li>
+            <li class="proItem"><a href="./products.html?id=pid_002" ><div></div><h2>科研服务</h2></a></li>
+            <li class="proItem"><a href="./products.html?id=pid_003" ><div></div><h2>大众健康</h2></a></li>
+        </ul>
+    </div>
+    
+</div>
+
+<div id="newsAndVideo">
+    <div class="banxin clearfix">
+        <div id="hotNews" class="news">
+            <a class="barTitle" href="#">新闻动态</a>
+            <div class="news-content clearfix">
+                <template v-for=" v in hotNews">
+                    <a class="news-item" :href="newsDetailsUrl + v.id">
+                        <div v-if="v.img" class="news-item-img" :style="{ 'background-image': 'url('+ v.img +')'}"></div>
+                        <img v-else src="imgs/news/newstest.jpg" alt="未上传新闻图片" title="未上传新闻图片">
+                        <h3 class="news-item-title multiLineText2">{{ v.title }} </h3>
+                        <p class="news-item-text multiLineText3">{{ v.information }} </p>
+                        <span class="news-item-time">
+                        <span class="time-day">{{ v.day }}</span><span class="time-mon">{{ v.month }}</span>
+                        <br>
+                        <span class="time-year">{{ v.year }}</span></span>
+
+                    </a>
+
+                </template>
+
+            </div>
+        </div>
+
+
+
+        <div class="video">
+            <h2 class="barTitle">视频</h2>
+            <div class="video-content">
+                <video controls>
+                    <source src="http://thorgene-mweb-prod.oss-cn-beijing.aliyuncs.com/v123123456_720.mp4">
+                    您的浏览器不支持视频H5视频播放！
+                </video>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="partners">
+    <h2>合作伙伴：</h2>
+    <div class="out">
+        <div class="con">
+            <img  src="http://www.vlifebank.com/8a83af79ec2695106a6ea18b1e5e1219.png"><!--
+        --><img  src="http://www.vlifebank.com/8a83af79ec2695106a6ea18b1e5e1219.png">
+        </div>
+    </div>
+</div>
+
+<div id="footer">
+    <div class="banxin">
+        <div class="contact-us">
+            <div class="item1">
+                <span class="phone-icon">
+                <span class="fa fa-phone "></span>
+                </span>
+                <h3>400 - 808 - 8978</h3>
+                <p>周一至周五 9:00-18:00</p>
+            </div>
+            <div class="item2">
+                <a class="button-contact" href="#">
+                    在线咨询
+                </a>
+            </div>
+
+            <div class="item3">
+                <span class="address-icon">
+                <span class="fa fa-map-marker"></span>
+                </span>
+
+                <p>
+                    北京市经济技术开发区科创六街
+                </p>
+                <p> &nbsp; &nbsp; &nbsp; &nbsp;88号生物医药园A1-2层
+                </p>
+            </div>
+        </div>
+        <div class="about-us">
+            <h2>关于我们</h2>
+            <ul>
+                <li><a href="#">公司简介</a></li>
+            </ul>
+        </div>
+
+        <div class="news">
+            <h2>新闻中心</h2>
+            <ul>
+                <li><a href="#">公司新闻</a></li>
+            </ul>
+        </div>
+        <div class="service">
+            <h2>服务支持</h2>
+            <ul>
+                <li><a href="#">技术支持</a></li>
+                <li><a href="#">帮助中心</a></li>
+            </ul>
+        </div>
+        <div class="weixin">
+            <h2>微信公众号</h2>
+            <img src="imgs/common/weixin.jpg" alt="">
+        </div>
+    </div>
+</div>
+
+<div id="bottom">
+    <p>北京索真医学检验所有限公司 &nbsp;&nbsp; 索真（北京）医学科技有限公司  &nbsp;&nbsp; &nbsp;&nbsp;<span>copyright &copy; 2017,索真,all rights reserved. </span> </p>
+</div>
+
+
 <script src="lib/swiper/swiper.jquery.js"></script>
-<script type="text/javascript" src="js/index.js"></script></body>
+<script src="lib/vue.js"></script>
+<script src="js/nav.js"></script>
+<script type="text/javascript" src="js/index.js"></script>
+<script>
+    $(function () {
+        var bannarSwiper = new Swiper ('#bannar', {
+            loop: true,
+            autoplay:3000,
+            speed:1000,
+            autoplayDisableOnInteraction : false,
+        });
+
+        var hotNews = [
+                {
+                    "id": "news_20171011170940",
+                    "title": "天方创新明星产品“永不止步”运动基因检测见证“冰雪运动基金”签约仪式",
+                    "img": "imgs/news/newstest.jpg",
+                    "information": "2017年7月31日，天方创新CEO妙红女士受邀出席深创投主办的2017京津冀经济发展论坛",
+                    "day": "31",
+                    "month": "Jul",
+                    "year": "2017"
+                },
+                {
+                    "id": "news_20171011170625",
+                    "title": "前海长城基金管理有限公司董事长一行人参观索真医学检验中心",
+                    "img": "imgs/news/newstest.jpg",
+                    "information": "2017年8月10日，前海长城基金管理（深圳）有限公司常董事长等一行人到访索真医学检验中心",
+                    "day": "10",
+                    "month": "Aug",
+                    "year": "2017"
+                }
+        ];
+
+        var hotNews = new Vue({
+            el:"#hotNews",
+            data:{
+                newsDetailsUrl:'./newsDetails.html?id=',
+                hotNews:hotNews
+            },
+            mounted:function () {
+                var _this  = this;
+                $.ajax({
+                    url:'/thorgeneweb/web_news/thorgeneweb_news!getSimpleNewForPcIndex.action',
+                    data:{
+                        // product_id:getId()
+                    },
+                    async:false, // 同步数据请求
+                    dataType:'json',
+                    success:function (data) {
+                        if(data.length >= 2){
+                            _this.hotNews = data.slice(0,2);
+                            console.log( 'ajax请求热点新闻成功' );
+                        }else{
+                            alert('后台返回数据有误，请稍后再试！');
+                        }
+                    },
+                    error:function (data) {
+                        console.log('ajax请求热点新闻失败：',data );
+                    }
+                })
+            }
+        })
+    })
+</script>
+</body>
 </html>

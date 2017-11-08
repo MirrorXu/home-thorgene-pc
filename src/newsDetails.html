@@ -1,13 +1,212 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>索真-新闻详情</title>
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>新闻详情</title>
+    <link rel="stylesheet" href="font/css/font-awesome.min.css">
+    <link href="lib/swiper/swiper.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/news-product-details.css">
+
+    <script src="lib/jquery3.2.1.js"></script>
+    <script src="js/getProAll.js"></script>
 </head>
 <body>
-<div id="app">
 
+<div id="nav" class="nav">
+    <div class="banxin clearfix">
+        <a class="logoBox" href="./index.html">
+        </a>
+        <ul id="nav-cotent" class="clearfix">
+            <li><a href="./index.html">首页</a></li>
+            <li id="linchuang">临床服务</li>
+            <li id="keyan">科研服务</li>
+            <li id="dazong">大众健康</li>
+            <li><a href="./news.html">新闻动态</a></li>
+            <li><a href="./about.html">关于我们</a></li>
+        </ul>
+        <div class="hotCall">
+            <i class="fa fa-phone"></i>热线咨询服务：<span class="telNum">400-808-8978</span>
+        </div>
+    </div>
+</div>
+<!-----------start   nav-slider  ------------------>
+<div id="navSlider">
+    <!--大众健康navSlider-->
+    <div id="dazongSlider" class="navSilder">
+        <div class="banxin">
+            <div class="content clearfix">
+                <template v-for="v in dazong.children" >
+                    <a v-for="v in v.children" :href="baseUrl+v.id">{{ v.text }}</a>
+                </template>
+            </div>
+        </div>
+    </div>
+    <!--科研navSlider-->
+    <div id="keyanSlider" class="navSilder">
+        <div class="banxin">
+            <div class="content clearfix">
+                <template v-for="v in keyan.children" >
+                    <a v-for="v in v.children" :href="baseUrl+v.id">{{ v.text }}</a>
+                </template>
+            </div>
+        </div>
+    </div>
+    <!--临床navSlider-->
+    <div id="linchuangSlider" class="navSilder">
+        <div class="banxin">
+            <div class="itemBars">
+                <span :class="{'selectedNarSliderItem':(v.text)===tempLinchuang[0].text}" v-for="v in linchuang.children" @click="changTempLinchuang(v.text)">{{ v.text }}</span>
+            </div>
+            <div class="item-content clearfix">
+                <template v-for="v in tempLinchuang[0].children">
+
+                    <a class="item-content-item" v-for="v in v.children"  :href="baseUrl+v.id">{{ v.text }}</a>
+
+                </template>
+            </div>
+        </div>
+    </div>
+</div>
+<!-----------end    nav-slider  ------------------>
+
+
+<div class="pageHeader">
+    <img src="imgs/page-header/news-pageHeader.png" alt="">
 </div>
 
-<script type="text/javascript" src="js/newsDetails.js"></script></body>
+
+<div class="news-box">
+    <div class="banxin" v-if="newsDetails.news_title">
+        <h3 class="news-details-title"> {{newsDetails.news_title}} </h3>
+        <div class="news-details-info">
+            <span class="news-details-info-time"><i class="fa fa-clock-o"></i> : {{newsDetails.news_time || '--'}}</span>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <span class="news-details-info-editor"><i class="fa fa-user-o"></i> : {{newsDetails.news_editor ||'--'}}</span>
+        </div>
+        <span class="separator"></span>
+        <div class="UE-Box UE_style-1" v-if="newsDetails.news_content" v-html=" newsDetails.news_content">
+        </div>
+    </div>
+    <div v-else class="banxin">
+        <div class="loadingBox">
+            <i class="fa fa-spinner fa-spin" aria-hidden="true"></i>
+        </div>
+    </div>
+</div>
+
+
+<div id="footer">
+    <div class="banxin">
+        <div class="contact-us">
+            <div class="item1">
+                <span class="phone-icon">
+                <span class="fa fa-phone "></span>
+                </span>
+                <h3>400 - 808 - 8978</h3>
+                <p>周一至周五 9:00-18:00</p>
+            </div>
+            <div class="item2">
+                <a class="button-contact" href="#">
+                    在线咨询
+                </a>
+            </div>
+
+            <div class="item3">
+                <span class="address-icon">
+                <span class="fa fa-map-marker"></span>
+                </span>
+
+                <p>
+                    北京市经济技术开发区科创六街
+                </p>
+                <p> &nbsp; &nbsp; &nbsp; &nbsp;88号生物医药园A1-2层
+                </p>
+            </div>
+        </div>
+        <div class="about-us">
+            <h2>关于我们</h2>
+            <ul>
+                <li><a href="#">公司简介</a></li>
+            </ul>
+        </div>
+
+        <div class="news">
+            <h2>新闻中心</h2>
+            <ul>
+                <li><a href="#">公司新闻</a></li>
+            </ul>
+        </div>
+        <div class="service">
+            <h2>服务支持</h2>
+            <ul>
+                <li><a href="#">技术支持</a></li>
+                <li><a href="#">帮助中心</a></li>
+            </ul>
+        </div>
+        <div class="weixin">
+            <h2>微信公众号</h2>
+            <img src="imgs/common/weixin.jpg" alt="">
+        </div>
+    </div>
+</div>
+
+<div id="bottom">
+    <p>北京索真医学检验所有限公司 &nbsp;&nbsp; 索真（北京）医学科技有限公司  &nbsp;&nbsp; &nbsp;&nbsp;<span>copyright &copy; 2017,索真,all rights reserved. </span> </p>
+</div>
+
+
+
+<script src="lib/swiper/swiper.jquery.js"></script>
+<script src="lib/vue.js"></script>
+<script src="js/nav.js"></script>
+<script>
+    var newsDetails = {
+        "news_id": "news_20171011170940",
+        "news_title": "天方创新明星产品“永不止步”运动基因检测见证“冰雪运动基金”签约仪式",
+        "news_content": "<p><span style=\"color: rgb(51, 51, 51); font-family: &quot;microsoft yahei&quot;; font-size: 18px; line-height: 36px; widows: 1;\">7月31日下午，由深圳市创新投资集团主办的2017京津冀经济发展论坛在河北省张家口市成功举办。</span></p><p><span style=\"color: rgb(51, 51, 51); font-family: &quot;microsoft yahei&quot;; font-size: 18px; line-height: 36px; widows: 1;\"><img src=\"/img/utf8-jsp/jsp/upload/image/20171011/1507712922124031395.png\" title=\"1507712922124031395.png\" alt=\"b7aa53ddb7b3e60266ecce8d6e2caf16.png\"/></span></p><p><span style=\"color: rgb(51, 51, 51); font-family: &quot;microsoft yahei&quot;; font-size: 18px; line-height: 36px; widows: 1;\"><span style=\"color: rgb(51, 51, 51); font-family: &quot;microsoft yahei&quot;; font-size: 18px; line-height: 36px; widows: 1;\">张家口市委书记，深创投董事长，河北省商务厅领导，张家口市常务副市长，市委常委，深创投总裁，副总裁，深创投合作伙伴及投资企业代表等240余人参会。</span></span></p><p><img src=\"/img/utf8-jsp/jsp/upload/image/20171011/1507712911784047012.png\" title=\"1507712911784047012.png\" alt=\"8554cccd0fe0aba263bceeed9ce93047.png\"/></p><p class=\"src-components-news-___News__newsP___v3znj\" style=\"margin-top: 0px; margin-bottom: 30px; padding: 0px; box-sizing: border-box; font-size: 18px; color: rgb(51, 51, 51); line-height: 36px; font-family: &quot;microsoft yahei&quot;; white-space: normal; widows: 1;\">论坛上，河北省体育局，深创投，张家口建设发展集团有限公司签署了《河北冰雪产业基金合作框架协议》，拟合作设立基金，共同推动冰雪运动产业发展，全力支持北京-张家口2022年国际冬季奥运会。</p><p class=\"src-components-news-___News__newsP___v3znj\" style=\"margin-top: 0px; margin-bottom: 30px; padding: 0px; box-sizing: border-box; font-size: 18px; color: rgb(51, 51, 51); line-height: 36px; font-family: &quot;microsoft yahei&quot;; white-space: normal; widows: 1;\">本次论坛上，做为参会嘉宾专属产品，天方创新明星产品“永不止步”运动基因检测见证了“冰雪运动基金”签约仪式。</p><p class=\"src-components-news-___News__newsP___v3znj\" style=\"margin-top: 0px; margin-bottom: 30px; padding: 0px; box-sizing: border-box; font-size: 18px; color: rgb(51, 51, 51); line-height: 36px; font-family: &quot;microsoft yahei&quot;; white-space: normal; widows: 1;\"><img src=\"/img/utf8-jsp/jsp/upload/image/20171011/1507712956591095429.png\" title=\"1507712956591095429.png\" alt=\"f0e37ee055f1d654977d754693e827e5.png\"/></p><p class=\"src-components-news-___News__newsP___v3znj\" style=\"margin-top: 0px; margin-bottom: 30px; padding: 0px; box-sizing: border-box; font-size: 18px; color: rgb(51, 51, 51); line-height: 36px; font-family: &quot;microsoft yahei&quot;; white-space: normal; widows: 1;\"><span style=\"color: rgb(51, 51, 51); font-family: &quot;microsoft yahei&quot;; font-size: 18px; line-height: 36px; widows: 1;\">“永不止步”结合基因检测和大数据分析技术，一方面能够帮助人们了解运动潜能，科学选择适合自己的运动项目，另一方面，获知潜在的运动风险也有利于更好的规避运动损伤。</span></p><p><br/></p>",
+        "news_time": "2017-07-31",
+        "news_editor": "索真小编",
+        "news_isshow": "是",
+        "status": "",
+        "news_image": "/img/utf8-jsp/jsp/upload/image/product/20171011170937805.png",
+        "news_information": "2017年7月31日，天方创新CEO妙红女士受邀出席深创投主办的2017京津冀经济发展论坛"
+    }
+
+
+    var newsDetailsApp = new Vue({
+        el:'.news-box',
+        data:{
+            newsDetails:''
+        },
+        mounted:function () {
+            var _this = this;
+            $.ajax({
+                url:'/thorgeneweb/web_news/thorgeneweb_news!findById.action',
+                data:{
+                     id:window.location.href.split('?')[1].split('=')[1]
+                },
+                async:false, // 同步数据请求
+                dataType:'json',
+                success:function (data) {
+                    if(data){
+                        _this.newsDetails = data;
+                        console.log( 'ajax请求新闻详情成功' );
+                    }else{
+                        alert('服务器繁忙，请稍后再试！');
+                    }
+                },
+                error:function (data) {
+                    console.log('ajax新闻详情失败：',data );
+                    _this.newsDetails = newsDetails;
+                }
+            });
+        }
+    })
+</script>
+
+</body>
 </html>

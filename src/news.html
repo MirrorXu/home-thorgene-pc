@@ -26,7 +26,7 @@
             <li id="keyan">科研服务</li>
             <li id="dazong">大众健康</li>
             <li><a href="./news.html">新闻动态</a></li>
-            <li><a href="./about.html">关于我们</a></li>
+            <li><a href="about-us.html">关于我们</a></li>
         </ul>
         <div class="hotCall">
             <i class="fa fa-phone"></i>热线咨询服务：<span class="telNum">400-808-8978</span>
@@ -132,21 +132,21 @@
         <div class="about-us">
             <h2>关于我们</h2>
             <ul>
-                <li><a href="#">公司简介</a></li>
+                <li><a href="about-us.html">公司简介</a></li>
             </ul>
         </div>
 
         <div class="news">
             <h2>新闻中心</h2>
             <ul>
-                <li><a href="#">公司新闻</a></li>
+                <li><a href="./news.html">公司新闻</a></li>
             </ul>
         </div>
         <div class="service">
             <h2>服务支持</h2>
             <ul>
-                <li><a href="#">技术支持</a></li>
-                <li><a href="#">帮助中心</a></li>
+                <li>技术支持</li>
+                <li>帮助中心</li>
             </ul>
         </div>
         <div class="weixin">
@@ -163,7 +163,7 @@
 
 
 <script src="lib/swiper/swiper.jquery.js"></script>
-<script src="lib/vue.js"></script>
+<script src="lib/vue.min.js"></script>
 <script src="js/nav.js"></script>
 <script>
     var newsData = [
@@ -180,7 +180,7 @@
     var newsApp = new Vue({
         el:'.news',
         data:{
-            baseUrl:'./newsDetails.html?id=',
+            baseUrl:'./news-details.html?id=',
             newsData:newsData
         },
         mounted:function () {

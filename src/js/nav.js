@@ -21,7 +21,7 @@ $(function () {
 var navApp = new Vue({
     el: '#navSlider',
     data: {
-        baseUrl:'./productDetails.html?id=',
+        baseUrl:'./product-details.html?id=',
         linchuang: navData.filter(function (v) {
             return v.id === 'pid_001'
         })[0],

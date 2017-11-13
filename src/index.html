@@ -5,6 +5,14 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="keywords" content="索真, 索真医学, 索真官网,  基因检测">
+    <meta name="description" content="索真医学是由数名美国海归教授、肿瘤基因检测专家、中国科学院计算技术研究所的大数据分析专家和互联网专家联合创建,拥有基因检测技术、大数据分析平台和移动互联网平台。" />
+    <meta name="author" content="MirrorXu" />
+
+
+    <title>索真-首页</title>
+
+
     <link rel="stylesheet" href="font/css/font-awesome.min.css">
     <link href="lib/swiper/swiper.css" rel="stylesheet">
     <link rel="stylesheet" href="css/common.css">
@@ -12,6 +20,29 @@
 
     <script src="lib/jquery3.2.1.js"></script>
     <script src="js/getProAll.js"></script>
+    <script type="text/javascript">
+		$(function () {
+			if (IsPC()) {
+			} else {
+				var url = window.location.href;
+				url = url.replace("/src/", "/front/")
+				window.location.href = url
+			}
+		})
+
+		function IsPC() {
+			var userAgentInfo = navigator.userAgent;
+			var Agents = new Array("Android", "iPhone", "SymbianOS", "Windows Phone", "iPad", "iPod");
+			var flag = true;
+			for (var v = 0; v < Agents.length; v++) {
+				if (userAgentInfo.indexOf(Agents[v]) > 0) {
+					flag = false;
+					break;
+				}
+			}
+			return flag;
+		}
+    </script>
 </head>
 <body>
 

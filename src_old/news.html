@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>索真—新闻</title>
+    <link rel="stylesheet" href="font/css/font-awesome.min.css">
+    <link href="lib/swiper/swiper.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/news.css">
+
+    <script src="lib/jquery3.2.1.js"></script>
+    <script src="js/getProAll.js"></script>
+</head>
+<body>
+
+<div id="nav" class="nav">
+    <div class="banxin clearfix">
+        <a class="logoBox" href="./index.html">
+        </a>
+        <ul id="nav-cotent" class="clearfix">
+            <li><a href="./index.html">首页</a></li>
+            <li id="linchuang">临床服务</li>
+            <li id="keyan">科研服务</li>
+            <li id="dazong">大众健康</li>
+            <li><a href="./news.html">新闻动态</a></li>
+            <li><a href="about-us.html">关于我们</a></li>
+        </ul>
+        <div class="hotCall">
+            <i class="fa fa-phone"></i>热线咨询服务：<span class="telNum">400-808-8978</span>
+        </div>
+    </div>
+</div>
+<!-----------start   nav-slider  ------------------>
+<div id="navSlider">
+    <!--大众健康navSlider-->
+    <div id="dazongSlider" class="navSilder">
+        <div class="banxin">
+            <div class="content clearfix">
+                <template v-for="v in dazong.children" >
+                    <a v-for="v in v.children" :href="baseUrl+v.id">{{ v.text }}</a>
+                </template>
+            </div>
+        </div>
+    </div>
+    <!--科研navSlider-->
+    <div id="keyanSlider" class="navSilder">
+        <div class="banxin">
+            <div class="content clearfix">
+                <template v-for="v in keyan.children" >
+                    <a v-for="v in v.children" :href="baseUrl+v.id">{{ v.text }}</a>
+                </template>
+            </div>
+        </div>
+    </div>
+    <!--临床navSlider-->
+    <div id="linchuangSlider" class="navSilder">
+        <div class="banxin">
+            <div class="itemBars">
+                <span :class="{'selectedNarSliderItem':(v.text)===tempLinchuang[0].text}" v-for="v in linchuang.children" @click="changTempLinchuang(v.text)">{{ v.text }}</span>
+            </div>
+            <div class="item-content clearfix">
+                <template v-for="v in tempLinchuang[0].children">
+
+                    <a class="item-content-item" v-for="v in v.children"  :href="baseUrl+v.id">{{ v.text }}</a>
+
+                </template>
+            </div>
+        </div>
+    </div>
+</div>
+<!-----------end    nav-slider  ------------------>
+
+
+<div class="pageHeader">
+    <img src="imgs/page-header/news-pageHeader.png" alt="">
+</div>
+<div class="news">
+    <div class="banxin">
+        <h2 class="news-title">公司新闻</h2>
+        <div class="news-content clearfix">
+            <template v-for=" v in newsData">
+
+                <a class="news-item" :href="baseUrl + v.id">
+                    <div v-if="v.img" class="news-item-img" :style="{'background-image': 'url(' + v.img + ')'}"></div>
+                    <div v-else class="news-item-img" style="background: url(imgs/news/newstest.jpg)"></div>
+                    <h3 class="news-item-title multiLineText2">{{ v.title }}</h3>
+                    <p class="news-item-text multiLineText3">{{ v.information }}</p>
+                    <span class="news-item-time">
+                        <span class="time-day">{{ v.day }}</span><span class="time-mon">{{ v.month }}</span>
+                        <br>
+                        <span class="time-year">{{ v.year }}</span>
+                    </span>
+                </a>
+
+            </template>
+        </div>
+    </div>
+</div>
+
+
+<div id="footer">
+    <div class="banxin">
+        <div class="contact-us">
+            <div class="item1">
+                <span class="phone-icon">
+                <span class="fa fa-phone "></span>
+                </span>
+                <h3>400 - 808 - 8978</h3>
+                <p>周一至周五 9:00-18:00</p>
+            </div>
+            <div class="item2">
+                <a class="button-contact" href="#">
+                    在线咨询
+                </a>
+            </div>
+
+            <div class="item3">
+                <span class="address-icon">
+                <span class="fa fa-map-marker"></span>
+                </span>
+
+                <p>
+                    北京市经济技术开发区科创六街
+                </p>
+                <p> &nbsp; &nbsp; &nbsp; &nbsp;88号生物医药园A1-2层
+                </p>
+            </div>
+        </div>
+        <div class="about-us">
+            <h2>关于我们</h2>
+            <ul>
+                <li><a href="about-us.html">公司简介</a></li>
+            </ul>
+        </div>
+
+        <div class="news">
+            <h2>新闻中心</h2>
+            <ul>
+                <li><a href="./news.html">公司新闻</a></li>
+            </ul>
+        </div>
+        <div class="service">
+            <h2>服务支持</h2>
+            <ul>
+                <li>技术支持</li>
+                <li>帮助中心</li>
+            </ul>
+        </div>
+        <div class="weixin">
+            <h2>微信公众号</h2>
+            <img src="imgs/common/weixin.jpg" alt="">
+        </div>
+    </div>
+</div>
+
+<div id="bottom">
+    <p>北京索真医学检验所有限公司 &nbsp;&nbsp; 索真（北京）医学科技有限公司  &nbsp;&nbsp; &nbsp;&nbsp;<span>copyright &copy; 2017,索真,all rights reserved. </span> </p>
+</div>
+
+
+
+<script src="lib/swiper/swiper.jquery.js"></script>
+<script src="lib/vue.min.js"></script>
+<script src="js/nav.js"></script>
+<script>
+    var newsData = [
+        {
+            "id": "news_20171011170940",
+            "title": "天方创新明星产品“永不止步”运动基因检测见证“冰雪运动基金”签约仪式",
+            "img": "imgs/news/newstest.jpg",
+            "information": "2017年7月31日，天方创新CEO妙红女士受邀出席深创投主办的2017京津冀经济发展论坛",
+            "day": "31",
+            "month": "Jul",
+            "year": "2017"
+        }
+    ]
+    var newsApp = new Vue({
+        el:'.news',
+        data:{
+            baseUrl:'./news-details.html?id=',
+            newsData:newsData
+        },
+        mounted:function () {
+            var _this = this;
+            $.ajax({
+                baseUrl:'./newsDetails.html?id=',
+                url:'/thorgeneweb/web_news/thorgeneweb_news!getSimpleNewForPc.action',
+                data:{
+                    // product_id:getId()
+                },
+                async:false, // 同步数据请求
+                dataType:'json',
+                success:function (data) {
+                    if(data){
+                        _this.newsData = data;
+                        console.log( 'ajax请求新闻列表数据成功' );
+                    }else{
+                        alert('服务器繁忙，请稍后再试！');
+                    }
+                },
+                error:function (data) {
+                    console.log('ajax请求新闻列表数据失败：',data );
+                }
+            });
+        }
+    })
+</script>
+
+</body>
+</html>

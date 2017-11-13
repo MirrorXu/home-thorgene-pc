@@ -106,16 +106,16 @@
   color: #676767 !important;
 }
 .UE_style-1 img {
-  max-width: 90%;
+  max-width: 96%;
   height: auto;
   display: block;
   margin: 30px auto;
 }
 .UE_style-1 table {
-  max-width: 80%;
+  max-width: 96%;
   margin: 30px auto;
 }
-.UE_style-1 table tbody tr :empty {
+.UE_style-1 table tbody tr > :empty {
   display: none;
 }
 .UE_style-1 table tbody > tr:first-child :empty {

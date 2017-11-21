@@ -102,15 +102,22 @@ function IsPC(){
 
 
 <div class="news-box">
-    <div class="banxin" v-if="newsDetails.news_title">
-        <h3 class="news-details-title"> {{newsDetails.news_title}} </h3>
+    <div class="banxin" v-if="newsDetails.title">
+        <h3 class="news-details-title" style="text-align: center"> {{newsDetails.title}} </h3>
         <div class="news-details-info">
-            <span class="news-details-info-time"><i class="fa fa-clock-o"></i> : {{newsDetails.news_time || '--'}}</span>
+            <span class="news-details-info-time"><i class="fa fa-clock-o"></i> : {{newsDetails.time || '--'}}</span>
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <span class="news-details-info-editor"><i class="fa fa-user-o"></i> : {{newsDetails.news_editor ||'--'}}</span>
+            <span class="news-details-info-editor"><i class="fa fa-user-o"></i> : {{newsDetails.author ||'--'}}</span>
         </div>
         <span class="separator"></span>
-        <div class="UE-Box UE_style-1" v-if="newsDetails.news_content" v-html=" newsDetails.news_content">
+        <div class="UE-Box UE_style-1" v-if="newsDetails.content" >
+            <template v-for="(v , k ) in newsDetails.content">
+                <template v-for="( v , k  ) in v">
+                        <template v-if="k =='img'"><img :src="v" alt="v" title="v"></template>
+                        <template v-else-if="k =='p'"><p style="font-size: 16px !important; padding-bottom: 20px">{{ v }}</p></template>
+                        <template v-else><p style="font-size: 16px !important; padding-bottom: 20px">{{ v }}</p></template>
+                </template>
+            </template>
         </div>
     </div>
     <div v-else class="banxin">
@@ -186,16 +193,14 @@ function IsPC(){
 <script src="lib/vue.min.js"></script>
 <script src="js/nav.js"></script>
 <script>
-    var newsDetails = {
-        "news_id": "news_20171011170940",
-        "news_title": "天方创新明星产品“永不止步”运动基因检测见证“冰雪运动基金”签约仪式",
-        "news_content": "<p><span style=\"color: rgb(51, 51, 51); font-family: &quot;microsoft yahei&quot;; font-size: 18px; line-height: 36px; widows: 1;\">7月31日下午，由深圳市创新投资集团主办的2017京津冀经济发展论坛在河北省张家口市成功举办。</span></p><p><span style=\"color: rgb(51, 51, 51); font-family: &quot;microsoft yahei&quot;; font-size: 18px; line-height: 36px; widows: 1;\"><img src=\"/img/utf8-jsp/jsp/upload/image/20171011/1507712922124031395.png\" title=\"1507712922124031395.png\" alt=\"b7aa53ddb7b3e60266ecce8d6e2caf16.png\"/></span></p><p><span style=\"color: rgb(51, 51, 51); font-family: &quot;microsoft yahei&quot;; font-size: 18px; line-height: 36px; widows: 1;\"><span style=\"color: rgb(51, 51, 51); font-family: &quot;microsoft yahei&quot;; font-size: 18px; line-height: 36px; widows: 1;\">张家口市委书记，深创投董事长，河北省商务厅领导，张家口市常务副市长，市委常委，深创投总裁，副总裁，深创投合作伙伴及投资企业代表等240余人参会。</span></span></p><p><img src=\"/img/utf8-jsp/jsp/upload/image/20171011/1507712911784047012.png\" title=\"1507712911784047012.png\" alt=\"8554cccd0fe0aba263bceeed9ce93047.png\"/></p><p class=\"src-components-news-___News__newsP___v3znj\" style=\"margin-top: 0px; margin-bottom: 30px; padding: 0px; box-sizing: border-box; font-size: 18px; color: rgb(51, 51, 51); line-height: 36px; font-family: &quot;microsoft yahei&quot;; white-space: normal; widows: 1;\">论坛上，河北省体育局，深创投，张家口建设发展集团有限公司签署了《河北冰雪产业基金合作框架协议》，拟合作设立基金，共同推动冰雪运动产业发展，全力支持北京-张家口2022年国际冬季奥运会。</p><p class=\"src-components-news-___News__newsP___v3znj\" style=\"margin-top: 0px; margin-bottom: 30px; padding: 0px; box-sizing: border-box; font-size: 18px; color: rgb(51, 51, 51); line-height: 36px; font-family: &quot;microsoft yahei&quot;; white-space: normal; widows: 1;\">本次论坛上，做为参会嘉宾专属产品，天方创新明星产品“永不止步”运动基因检测见证了“冰雪运动基金”签约仪式。</p><p class=\"src-components-news-___News__newsP___v3znj\" style=\"margin-top: 0px; margin-bottom: 30px; padding: 0px; box-sizing: border-box; font-size: 18px; color: rgb(51, 51, 51); line-height: 36px; font-family: &quot;microsoft yahei&quot;; white-space: normal; widows: 1;\"><img src=\"/img/utf8-jsp/jsp/upload/image/20171011/1507712956591095429.png\" title=\"1507712956591095429.png\" alt=\"f0e37ee055f1d654977d754693e827e5.png\"/></p><p class=\"src-components-news-___News__newsP___v3znj\" style=\"margin-top: 0px; margin-bottom: 30px; padding: 0px; box-sizing: border-box; font-size: 18px; color: rgb(51, 51, 51); line-height: 36px; font-family: &quot;microsoft yahei&quot;; white-space: normal; widows: 1;\"><span style=\"color: rgb(51, 51, 51); font-family: &quot;microsoft yahei&quot;; font-size: 18px; line-height: 36px; widows: 1;\">“永不止步”结合基因检测和大数据分析技术，一方面能够帮助人们了解运动潜能，科学选择适合自己的运动项目，另一方面，获知潜在的运动风险也有利于更好的规避运动损伤。</span></p><p><br/></p>",
-        "news_time": "2017-07-31",
-        "news_editor": "索真小编",
-        "news_isshow": "是",
-        "status": "",
-        "news_image": "/img/utf8-jsp/jsp/upload/image/product/20171011170937805.png",
-        "news_information": "2017年7月31日，天方创新CEO妙红女士受邀出席深创投主办的2017京津冀经济发展论坛"
+    var newsDetails =  {
+	    "id": 164,
+	    "title": " 天方创新联合创始人受邀参加国家健康医疗大数据中心工作推进会",
+	    "desc": "国家卫计委将重点推进国家健康大数据中心建设",
+	    "time": "2017-11-10",
+	    "titleImg": "http://test.gene-report.thorgene.com/vlifebank_news_pic/9b230710-caa8-11e7-9569-9b74ca429619.jpg",
+	    "content": "[{\"p\":\"11月10日，在南京扬子科创中心，扬子国投集团举办了国家健康医疗大数据中心工作推进会，天方创新联合创始人、CTO，刘泓博士受邀参加。\"},{\"img\":\"http://test.gene-report.thorgene.com/vlifebank_news_pic/9b230710-caa8-11e7-9569-9b74ca4296191.jpg\"},{\"p\":\"近一年，在国家卫计委大力发展健康大数据中心建设的部署下，扬子科创中心作为全国唯一实际运行的试点中心，被给予厚望。天方创新作为入住扬子科创中心的生物科技公司中的一员，刘泓博士与其他企业领导人一起，共同商讨了扬子科创中心平台建设和规划问题。\"},{\"img\":\"http://test.gene-report.thorgene.com/vlifebank_news_pic/9b230710-caa8-11e7-9569-9b74ca4296193.jpg\"}]",
+	    "author": "天方创新"
     }
 
 
@@ -218,31 +223,43 @@ function IsPC(){
     var newsDetailsApp = new Vue({
         el:'.news-box',
         data:{
-            newsDetails:''
+            newsDetails:newsDetails,
+            newsId:getId(),
+            newsList:[],
+//            tempNews:newsDetails
         },
         mounted:function () {
             var _this = this;
-            $.ajax({
-                url:'/thorgeneweb/web_news/thorgeneweb_news!findById.action',
-                data:{
-                     id:getId ()
-                },
-                async:false, // 同步数据请求
-                dataType:'json',
-                success:function (data) {
-                    if(data){
-                        _this.newsDetails = data;
-                        console.log( 'ajax请求新闻详情成功' );
+
+	        $.getJSON('http://test.pub.vlifebank.com/vlifebank-api/news-list' ,function (data) {
+		        if( data.retCode === 0 ){
+//			        console.log( 'jsonp新闻数据请求成功');
+
+//			        console.log( data.data)
+//                    console.log('_newsId:', _this.newsId );
+
+			        var news = data.data.filter( function ( v ,i ) {
+                        return v.id == _this.newsId
+			        } )[0];
+
+			        if( (typeof news.content) == 'string'){
+			        	news.content = JSON.parse( news.content );
+//			        	console.log( 'news.content数据类型：' ,  typeof news.content )
                     }else{
-                        alert('服务器繁忙，请稍后再试！');
+//			        	console.log( 'news.content 并非字符串' )
                     }
-                },
-                error:function (data) {
-                    console.log('ajax新闻详情失败：',data );
-                    _this.newsDetails = newsDetails;
-                }
-            });
-        }
+
+                    _this.newsDetails = news
+//			        console.log( _this.newsDetails)
+                    console.log( Array.isArray( _this.newsDetails.content ))
+                    console.log( typeof _this.newsDetails.content)
+
+		        }else{
+			        console.log( '天方创新新闻接口出现错误...请确认')
+		        }
+	        })
+        },
+
     })
 </script>
 

@@ -101,7 +101,7 @@ function IsPC(){
 </div>
 
 <div class="news">
-    <div class="banxin">
+    <div class="banxin" v-if=" newsData.length > 0 ">
         <h2 class="news-title">公司新闻</h2>
         <div class="news-content clearfix">
             <template v-for=" v in newsData">
@@ -121,6 +121,13 @@ function IsPC(){
             </template>
         </div>
     </div>
+
+    <div v-else class="banxin">
+        <div class="loadingBox">
+            <i class="fa fa-spinner fa-spin" aria-hidden="true"></i>
+        </div>
+    </div>
+
 </div>
 
 
@@ -168,8 +175,7 @@ function IsPC(){
         <div class="service">
             <h2>服务支持</h2>
             <ul>
-                <li>技术支持</li>
-                <li>帮助中心</li>
+                <li><a href="./trainingCenter.html">培训视频</a></li>
             </ul>
         </div>
         <div class="weixin">
@@ -186,21 +192,10 @@ function IsPC(){
 
 
 <script src="lib/swiper/swiper.jquery.js"></script>
-<!--<script src="lib/vue.min.js"></script>-->
-<script src="../node_modules/vue/dist/vue.js"></script>
+<script src="lib/vue.min.js"></script>
 <script src="js/nav.js"></script>
 <script>
-	var newsData = [
-		{
-			"id": 164,
-			"title": " 天方创新联合创始人受邀参加国家健康医疗大数据中心工作推进会",
-			"desc": "国家卫计委将重点推进国家健康大数据中心建设",
-			"time": "2017-11-10",
-			"titleImg": "http://test.gene-report.thorgene.com/vlifebank_news_pic/9b230710-caa8-11e7-9569-9b74ca429619.jpg",
-			"content": "[{\"p\":\"11月10日，在南京扬子科创中心，扬子国投集团举办了国家健康医疗大数据中心工作推进会，天方创新联合创始人、CTO，刘泓博士受邀参加。\"},{\"img\":\"http://test.gene-report.thorgene.com/vlifebank_news_pic/9b230710-caa8-11e7-9569-9b74ca4296191.jpg\"},{\"p\":\"近一年，在国家卫计委大力发展健康大数据中心建设的部署下，扬子科创中心作为全国唯一实际运行的试点中心，被给予厚望。天方创新作为入住扬子科创中心的生物科技公司中的一员，刘泓博士与其他企业领导人一起，共同商讨了扬子科创中心平台建设和规划问题。\"},{\"img\":\"http://test.gene-report.thorgene.com/vlifebank_news_pic/9b230710-caa8-11e7-9569-9b74ca4296193.jpg\"}]",
-			"author": "天方创新"
-		}
-	];
+	var newsData = [];
     var newsApp = new Vue({
         el:'.news',
         data:{
@@ -210,18 +205,21 @@ function IsPC(){
         mounted:function () {
             var _this = this;
 
-	        $.getJSON('http://vlifebank.com/vlifebank-api/news-list' ,function (data) {
-		        if( data.retCode === 0 ){
-//			        console.log( 'jsonp数据请求成功');
 
-			        _this.newsData = data.data;
+            $.ajax({
+                url:'http://www.vlifebank.com/vlifebank-api/news-list',
+                dataType:'json',
+                success:function (data) {
+	                if (data.retCode === 0) {
 
-//			        console.log( _this.newsData )
+		                _this.newsData = data.data;
 
-		        }else{
-			        console.log( '天方创新新闻接口出现错误...请确认')
-		        }
-	        })
+	                } else {
+		                console.log('天方创新新闻接口出现错误...请确认')
+	                }
+
+                }
+            })
         }
     })
 </script>

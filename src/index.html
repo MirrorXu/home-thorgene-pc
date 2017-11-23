@@ -221,8 +221,7 @@
         <div class="service">
             <h2>服务支持</h2>
             <ul>
-                <li>技术支持</li>
-                <li>帮助中心</li>
+                <li><a href="./trainingCenter.html">培训视频</a></li>
             </ul>
         </div>
         <div class="weixin">
@@ -279,15 +278,13 @@
             },
             mounted:function () {
                 var _this  = this;
-                $.getJSON('http://vlifebank.com/vlifebank-api/news-list' ,function (data) {
+                $.getJSON('http://www.vlifebank.com/vlifebank-api/news-list' ,function (data) {
                     if( data.retCode === 0 ){
-                    	console.log( 'jsonp数据请求成功');
 
                     	_this.hotNews = data.data.slice(0 , 2);
-                    	console.log( _this.hotNews )
 
                     }else{
-                    	console.log( '天方创新新闻接口出现错误...请确认')
+                    	console.log( '数据错误')
                     }
                 })
             }

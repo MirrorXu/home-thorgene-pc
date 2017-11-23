@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="keywords" content="索真, 索真医学, 索真官网,  基因检测">
+    <meta name="description" content="索真医学是由数名美国海归教授、肿瘤基因检测专家、中国科学院计算技术研究所的大数据分析专家和互联网专家联合创建,拥有基因检测技术、大数据分析平台和移动互联网平台。" />
+    <meta name="author" content="MirrorXu" />
+    <title>关于索真</title>
+    <link rel="stylesheet" href="font/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/trainingCenter.css">
+
+    <script src="lib/jquery3.2.1.js"></script>
+    <script src="js/getProAll.js"></script>
+    <script type="text/javascript">
+		$(function(){
+			if(IsPC()){
+			}else{
+				var url=window.location.href;
+				url = url.replace("/src/", "/front/")
+				window.location.href = url
+			}
+		})
+		function IsPC(){
+			var userAgentInfo = navigator.userAgent;
+			var Agents = new Array("Android", "iPhone", "SymbianOS", "Windows Phone", "iPad", "iPod");
+			var flag = true;
+			for (var v = 0; v < Agents.length; v++) {
+				if (userAgentInfo.indexOf(Agents[v]) > 0) { flag = false; break; }
+			}
+			return flag;
+		}
+    </script>
+</head>
+<body>
+
+
+<div id="nav" class="nav">
+    <div class="banxin clearfix">
+        <a class="logoBox" href="./index.html">
+        </a>
+        <ul id="nav-cotent" class="clearfix">
+            <li><a href="./index.html">首页</a></li>
+            <li id="linchuang">临床服务</li>
+            <li id="keyan">科研服务</li>
+            <li id="dazong">大众健康</li>
+            <li><a href="./news.html">新闻动态</a></li>
+            <li><a href="./about-us.html">关于我们</a></li>
+        </ul>
+        <div class="hotCall">
+            <i class="fa fa-phone"></i>热线咨询服务：<span class="telNum">400-808-8978</span>
+        </div>
+    </div>
+</div>
+<!-----------start   nav-slider  ------------------>
+<div id="navSlider">
+    <!--大众健康navSlider-->
+    <div id="dazongSlider" class="navSilder">
+        <div class="banxin">
+            <div class="content clearfix">
+                <template v-for="v in dazong.children" >
+                    <a v-for="v in v.children" :href="baseUrl+v.id">{{ v.text }}</a>
+                </template>
+            </div>
+        </div>
+    </div>
+    <!--科研navSlider-->
+    <div id="keyanSlider" class="navSilder">
+        <div class="banxin">
+            <div class="content clearfix">
+                <template v-for="v in keyan.children" >
+                    <a v-for="v in v.children" :href="baseUrl+v.id">{{ v.text }}</a>
+                </template>
+            </div>
+        </div>
+    </div>
+    <!--临床navSlider-->
+    <div id="linchuangSlider" class="navSilder">
+        <div class="banxin">
+            <div class="itemBars">
+                <span :class="{'selectedNarSliderItem':(v.text)===tempLinchuang[0].text}" v-for="v in linchuang.children" @click="changTempLinchuang(v.text)">{{ v.text }}</span>
+            </div>
+            <div class="item-content clearfix">
+                <template v-for="v in tempLinchuang[0].children">
+
+                    <a class="item-content-item" v-for="v in v.children"  :href="baseUrl+v.id">{{ v.text }}</a>
+
+                </template>
+            </div>
+        </div>
+    </div>
+</div>
+<!-----------end    nav-slider  ------------------>
+
+
+<div class="pageHeader">
+    <img src="imgs/page-header/about-pageHeader.png" alt="">
+</div>
+
+<div class="slider-navBar">
+    <div class="banxin">
+        <a href="./index.html">首页</a> / 培训中心
+    </div>
+</div>
+<div class="training-content">
+    <div class="banxin">
+        <video controls>
+            <source src="videos/medical-simple-protocol.mp4">
+            您的浏览器不支持视频H5视频播放！
+        </video>
+    </div>
+</div>
+
+
+<div id="footer">
+    <div class="banxin">
+        <div class="contact-us">
+            <div class="item1">
+                <span class="phone-icon">
+                <span class="fa fa-phone "></span>
+                </span>
+                <h3>400 - 808 - 8978</h3>
+                <p>周一至周五 9:00-18:00</p>
+            </div>
+            <div class="item2">
+                <a class="button-contact" href="#">
+                    在线咨询
+                </a>
+            </div>
+
+            <div class="item3">
+                <span class="address-icon">
+                <span class="fa fa-map-marker"></span>
+                </span>
+
+                <p>
+                    北京市经济技术开发区科创六街
+                </p>
+                <p> &nbsp; &nbsp; &nbsp; &nbsp;88号生物医药园A1-2层
+                </p>
+            </div>
+        </div>
+        <div class="about-us">
+            <h2>关于我们</h2>
+            <ul>
+                <li><a href="about-us.html">公司简介</a></li>
+            </ul>
+        </div>
+
+        <div class="news">
+            <h2>新闻中心</h2>
+            <ul>
+                <li><a href="./news.html">公司新闻</a></li>
+            </ul>
+        </div>
+        <div class="service">
+            <h2>服务支持</h2>
+            <ul>
+                <li><a href="./trainingCenter.html">培训视频</a></li>
+            </ul>
+        </div>
+        <div class="weixin">
+            <h2>微信公众号</h2>
+            <img src="imgs/common/weixin.jpg" alt="">
+        </div>
+    </div>
+</div>
+
+<div id="bottom">
+    <p>北京索真医学检验所有限公司 &nbsp;&nbsp; 索真（北京）医学科技有限公司  &nbsp;&nbsp; &nbsp;&nbsp;<span>copyright &copy; 2017,索真,all rights reserved. </span> </p>
+</div>
+
+<script src="lib/vue.min.js"></script>
+<script src="js/nav.js"></script>
+
+</body>
+</html>
+</html>

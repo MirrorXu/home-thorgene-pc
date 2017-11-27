@@ -1,6 +1,115 @@
+/*------------start-------------网站基本色系--------------------------------*/
+/*------------end------网站基本色系--------------------------------*/
 .training-content {
-  padding: 100px 0 ;
+  margin-bottom: 100px;
 }
-.training-content video {
-  width: 300px;
+.training-content .search-box {
+  overflow: hidden;
+  border-radius: 4px;
+  margin-top: 40px;
+  margin-bottom: 60px;
+  height: 45px;
+  background: #f0f0f0;
+  width: 100%;
+}
+.training-content .search-box .search-icon {
+  background: #f0f0f0;
+  float: left;
+  display: block;
+  width: 40px;
+  height: 100%;
+}
+.training-content .search-box .search-icon .fa {
+  font-size: 20px;
+  line-height: 45px;
+  height: 45px;
+  display: block;
+  width: 40px;
+  text-align: center;
+  color: #888;
+}
+.training-content .search-box .search-input {
+  float: left;
+  display: block;
+  height: inherit;
+  box-sizing: border-box;
+  width: 840px;
+  color: #888;
+  font-size: 16px;
+  line-height: 45px;
+  background: #f0f0f0;
+  border: none;
+  outline: none;
+}
+.training-content .search-box .search-button {
+  display: block;
+  width: 120px;
+  height: 100%;
+  float: right;
+  text-align: center;
+  background-color: #006699;
+  border: none;
+  font-size: 18px;
+  font-weight: bolder;
+  color: #fefefe;
+  border-image: none;
+  outline: none;
+  cursor: pointer;
+}
+.training-content .video-box .video-item {
+  margin-bottom: 20px;
+  margin-left: 10px;
+  margin-right: 5px;
+  width: 320px;
+  height: 244px;
+  overflow: hidden;
+  box-sizing: border-box;
+  border: 1px solid #f0f0f0;
+  float: left;
+  padding: 20px;
+  cursor: pointer;
+}
+.training-content .video-box .video-item video {
+  width: 278px;
+}
+.training-content .video-box .video-item img {
+  width: 278px;
+  height: 157px;
+}
+.training-content .video-box .video-item .video-title {
+  margin-top: 20px;
+  font-size: 16px;
+  color: #888;
+}
+.training-content .video-box .video-item .video-title:hover {
+  text-decoration: underline;
+}
+.training-content .video-box .video-item:nth-child(3n+1) {
+  margin-left: 0;
+}
+.training-content .no-video {
+  color: #cccccc;
+  min-height: 200px!important;
+  font-size: 20px;
+}
+.training-content .no-video span {
+  display: inline-block;
+  text-decoration: underline;
+  padding: 5px 20px;
+  font-size: 16px;
+  color: #006699;
+  cursor: pointer;
+}
+.training-content .video-tips {
+  margin-top: 50px;
+  font-size: 16px;
+}
+.training-content .video-tips span {
+  color: red;
+  font-weight: bolder;
+}
+.training-content .video-tips a {
+  display: inline-block;
+  font-size: 15px;
+  padding: 0 10px;
 }

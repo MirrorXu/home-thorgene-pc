@@ -16,27 +16,29 @@
 
     <script src="lib/jquery3.2.1.js"></script>
     <script src="js/getProAll.js"></script>
-     <script type="text/javascript">
-$(function(){
-	if(IsPC()){
-	}else{
-		var url=window.location.href; 
-		alert(url)
-		url = url.replace("/src/", "/front/")
-		alert(url)
-		window.location.href = url
-	}
-})
-function IsPC(){     
-    var userAgentInfo = navigator.userAgent;   
-    var Agents = new Array("Android", "iPhone", "SymbianOS", "Windows Phone", "iPad", "iPod");     
-    var flag = true;     
-    for (var v = 0; v < Agents.length; v++) {     
-        if (userAgentInfo.indexOf(Agents[v]) > 0) { flag = false; break; }     
-    }     
-    return flag;     
- }   
-</script>
+    <script type="text/javascript">
+		$(function () {
+			if (IsPC()) {
+			} else {
+				var url = window.location.href;
+				url = url.replace("/src/", "/front/")
+				window.location.href = url
+			}
+		})
+
+		function IsPC() {
+			var userAgentInfo = navigator.userAgent;
+			var Agents = new Array("Android", "iPhone", "SymbianOS", "Windows Phone", "iPad", "iPod");
+			var flag = true;
+			for (var v = 0; v < Agents.length; v++) {
+				if (userAgentInfo.indexOf(Agents[v]) > 0) {
+					flag = false;
+					break;
+				}
+			}
+			return flag;
+		}
+    </script>
 </head>
 <body>
 
@@ -166,7 +168,7 @@ function IsPC(){
         <div class="service">
             <h2>服务支持</h2>
             <ul>
-                <li><a href="./trainingCenter.html">培训视频</a></li>
+                <li><a href="./trainingCenter.html">培训讲堂</a></li>
             </ul>
         </div>
         <div class="weixin">

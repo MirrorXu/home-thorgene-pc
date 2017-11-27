@@ -8,7 +8,7 @@
     <meta name="keywords" content="索真, 索真医学, 索真官网,  基因检测">
     <meta name="description" content="索真医学是由数名美国海归教授、肿瘤基因检测专家、中国科学院计算技术研究所的大数据分析专家和互联网专家联合创建,拥有基因检测技术、大数据分析平台和移动互联网平台。" />
     <meta name="author" content="MirrorXu" />
-    <title>关于索真</title>
+    <title>培训讲堂</title>
     <link rel="stylesheet" href="font/css/font-awesome.min.css">
     <link rel="stylesheet" href="css/common.css">
     <link rel="stylesheet" href="css/trainingCenter.css">
@@ -36,8 +36,6 @@
     </script>
 </head>
 <body>
-
-
 <div id="nav" class="nav">
     <div class="banxin clearfix">
         <a class="logoBox" href="./index.html">
@@ -95,22 +93,49 @@
 </div>
 <!-----------end    nav-slider  ------------------>
 
-
 <div class="pageHeader">
-    <img src="imgs/page-header/about-pageHeader.png" alt="">
+    <img src="imgs/page-header/trainingCenter-pageHeader.png" alt="">
 </div>
 
 <div class="slider-navBar">
     <div class="banxin">
-        <a href="./index.html">首页</a> / 培训中心
+        <a href="./index.html">首页</a> / 培训讲堂
     </div>
 </div>
 <div class="training-content">
-    <div class="banxin">
-        <video controls>
-            <source src="videos/medical-simple-protocol.mp4">
-            您的浏览器不支持视频H5视频播放！
-        </video>
+    <div class="banxin" v-if="videos.length > 0">
+        <div class="search-box clearfix">
+            <span class="search-icon"> <i class="fa fa-search"></i></span>
+            <input class="search-input" type="text" v-model="key" @keydown.13="filterVideo( key )">
+            <button class="search-button" @click="filterVideo( key )">搜 索</button>
+        </div>
+
+
+        <div class="video-box clearfix" v-if="show.length > 0">
+            <div class="video-item" v-for="v in show" @click="playVideo( v.id )">
+                <video controls v-if="v.play" autoplay>
+                    <source :src="v.pubPath">
+                    您的浏览器不支持视频H5视频播放！
+                </video>
+                <img v-else :src="v.videoImg" alt="点击播放">
+                <h2 class="video-title multiLineText1" >{{ v.title }}</h2>
+            </div>
+        </div>
+
+        <div class="no-video" v-else>
+            非常抱歉，无法检索到相关内容...
+            <span @click="filterVideo('all')">查看所有视频</span>
+        </div>
+
+        <div class="video-tips">
+            <span>温馨提示：</span>视频播放需要较高浏览器版本的支持！如果您的浏览器无法正常播放视频，请使用 <a href="http://www.google.cn/chrome/browser/desktop/index.html">Chrome</a>/<a href="http://www.firefox.com.cn/">FireFox</a>/<a href="https://www.microsoft.com/zh-cn/windows/microsoft-edge">IE Edge</a>等浏览器进行尝试。
+        </div>
+    </div>
+
+    <div class="banxin" v-else>
+        <div class="loadingBox">
+            <i class="fa fa-spinner fa-spin" aria-hidden="true"></i>
+        </div>
     </div>
 </div>
 
@@ -159,7 +184,7 @@
         <div class="service">
             <h2>服务支持</h2>
             <ul>
-                <li><a href="./trainingCenter.html">培训视频</a></li>
+                <li><a href="./trainingCenter.html">培训讲堂</a></li>
             </ul>
         </div>
         <div class="weixin">
@@ -175,6 +200,76 @@
 
 <script src="lib/vue.min.js"></script>
 <script src="js/nav.js"></script>
+<script src="http://www.thorgene.org/videos/videoData.js"></script>
+
+<script>
+    if(!viedosData){
+	    var viedosData = [
+
+	    ];
+    }
+    var app = new Vue({
+        el:'.training-content',
+        data:{
+        	show:[
+
+            ],
+            videos:viedosData,
+            key:'',
+
+        },
+        methods:{
+        	filterVideo:function ( v ) {
+		        this.stopPlayVideo();
+                if( v ){
+
+
+	                if(v ==='all'){
+		                return this.show =  this.videos
+	                }else{
+		                var key = v;
+		                this.show = this.videos.filter(function ( v , i ) {
+			                return v.keywords && ( v.keywords.indexOf( key ) > -1 )
+		                })
+                    }
+
+                }else{
+        			console.log('参数有误')
+                }
+	        },
+            playVideo:function ( id ) {
+                if( id ){
+                    this.show.forEach(function (v , i ) {
+//                    	console.log(v.id , v.play );
+                    	if( v.id === id ){
+                    		v.play = 1
+                        }else {
+                    		v.play = 0
+                        }
+                    } )
+                }
+            },
+            stopPlayVideo:function () {
+                this.show.forEach(function (v , i ) {
+                	v.play = 0 ;
+                	console.log( v.id , v.play)
+                })
+            }
+
+        },
+        beforeMount:function () {
+        	this.show = this.videos;
+        },
+        mounted:function () {
+//            console.log('mounted')
+
+            console.log( this.show.length )
+        },
+        updated:function () {
+//            console.log( 'updated' , this.show.length )
+        }
+    })
+</script>
 
 </body>
 </html>

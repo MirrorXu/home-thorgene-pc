@@ -224,7 +224,7 @@ function IsPC(){
 
 	        $.getJSON('http://www.vlifebank.com/vlifebank-api/news-list' , function (data) {
 		        if( data.retCode === 0 ){
-			        console.log( 'jsonp新闻数据请求成功');
+//			        console.log( 'jsonp新闻数据请求成功');
 
 			        console.log( data.data)
                   console.log('_newsId:', _this.newsId );
@@ -235,14 +235,14 @@ function IsPC(){
 
 			        if( (typeof news.content) == 'string'){
 			        	news.content = JSON.parse( news.content );
-			        	console.log( 'news.content数据类型：' ,  typeof news.content )
+//			        	console.log( 'news.content数据类型：' ,  typeof news.content )
                     }else{
 			        	console.log( 'news.content 并非字符串' )
                     }
 
                     _this.newsDetails = news;
-                    console.log( Array.isArray( _this.newsDetails.content ));
-                    console.log( typeof _this.newsDetails.content)
+//                    console.log( Array.isArray( _this.newsDetails.content ));
+//                    console.log( typeof _this.newsDetails.content)
 
 		        }else{
 			        console.log( '天方创新新闻接口出现错误...请确认')

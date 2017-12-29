@@ -110,12 +110,12 @@ function IsPC(){
             <span class="news-details-info-editor"><i class="fa fa-user-o"></i> : {{newsDetails.author ||'--'}}</span>
         </div>
         <span class="separator"></span>
-        <div class="UE-Box UE_style-1" v-if="newsDetails.content" >
+        <div class="news-details-content" v-if="newsDetails.content" >
             <template v-for="(v , k ) in newsDetails.content">
                 <template v-for="( v , k  ) in v">
                         <template v-if="k =='img'"><img :src="v" alt="v" title="v"></template>
-                        <template v-else-if="k =='p'"><p style="font-size: 16px !important; padding-bottom: 20px">{{ v }}</p></template>
-                        <template v-else><p style="font-size: 16px !important; padding-bottom: 20px">{{ v }}</p></template>
+                        <template v-else-if="k =='p'"><p>{{ v }}</p></template>
+                        <template v-else><p>{{ v }}</p></template>
                 </template>
             </template>
         </div>

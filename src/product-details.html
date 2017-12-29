@@ -112,7 +112,7 @@
 
 
     <div class="product-box">
-        <div v-if="productDetails.product_content" class="banxin UE_style-1"  v-html="productDetails.product_content">
+        <div id="proDetails-data" v-if="productDetails.product_content" class="banxin "  v-html="productDetails.product_content">
 
         </div>
         <div v-else class="banxin">
@@ -253,14 +253,14 @@
 
     window.onload = function () {
 
-        $('.UE_style-1').find('*').attr({
+        $('#proDetails-data').find('*').attr({
             width:'',
             valign:'',
             class:'',
             style:''
         });
 
-        $('.UE_style-1').find('table').addClass('table table-bordered table-responsive');
+        $('#proDetails-data').find('table').addClass('table table-bordered table-responsive');
 
     }
 </script>

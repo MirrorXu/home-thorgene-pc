@@ -15,13 +15,16 @@
 //新闻详情页
 .news-box {
   padding-top: 60px;
+  padding-bottom: 60px;
   //background-color: lightskyblue;
   .news-details-title {
-    font-size: 28px;
+    color: #505050 !important;
+    font-size: 24px;
     font-weight: bolder;
-    color: @black1;
+    text-align:left !important;
   }
   .news-details-info {
+    color: #4b4b4b !important;
     padding-left: 10px;
     font-size: 15px;
     margin-top: 40px;
@@ -33,11 +36,27 @@
   }
   .separator {
     display: block;
-    border-bottom: 1px solid #cccccc;
+    margin-top: 10px;
+    border-bottom: 1px solid rgba(162, 162, 178, 0.76);
   }
-  .UE-Box {
+  .news-details-content{
+    font-size: 22px;
+    color: #515151;
+    font-weight: normal;
     margin-top: 40px;
-    padding-bottom: 60px;
+    margin-bottom: 40px;
+    p{
+      font-size: 18px;
+      font-weight: normal;
+      //text-indent: 2em;
+      line-height: 2;
+
+    }
+    img{
+      width: 100%;
+      margin-top: 50px;
+      margin-bottom: 50px;
+    }
   }
 
 }
@@ -71,52 +90,44 @@
   }
   .product-box {
     padding: 60px 0 150px 0;
-    //background-color: rebeccapurple;
-  }
-}
-
-.UE_style-1 {
-  //*:empty{
-  //  display: none;
-  //}
-  color: @black2 - 50 !important;
-
-  p{
-    font-size: 22px;
-    line-height: 1.6;
-  }
-
-  img {
-    width: 96%;
-    height: auto;
-    display: block;
-    margin: 30px auto;
-  }
-
-  table {
-    max-width: 96%;
-    margin: 30px auto;
-    tbody{
-      tr{
-        >:empty{
-          display: none;
+    .banxin{
+      h2{
+        color: #126699;
+        font-size: 26px;
+        font-weight: bolder;
+        padding-left: 15px;
+        margin-bottom: 15px;
+        background-image: linear-gradient(to top , #006699 ,#006699 ,#006699);
+        background-repeat: no-repeat;
+        background-size: 3px 20px;
+        background-position: left center;
+      }
+      h2{
+        *{
+          color: #126699;
+          font-size: 26px;
+          font-weight: bolder;
         }
       }
-      > tr:first-child{
-        :empty{
-          display: none;
-        }
-        *{
-          font-weight: bolder;
-          text-align: center;
-        }
+      h2:not(:first-child){
+        margin-top: 50px;
+      }
+      p{
+        font-size: 16px;
+        line-height: 1.6;
+      }
+      img{
+        display: block;
+        max-width: 90%;
+        height: auto;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 30px;
+        margin-bottom: 30px;
       }
 
     }
+
+
   }
-
-
-
 }
-
-

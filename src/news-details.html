@@ -222,7 +222,7 @@ function IsPC(){
         mounted:function () {
             var _this = this;
 
-	        $.getJSON('http://www.vlifebank.com/vlifebank-api/news-list' , function (data) {
+	        $.getJSON('http://api.vlifebank.com/vlifebank-api/news-list' , function (data) {
 		        if( data.retCode === 0 ){
 //			        console.log( 'jsonp新闻数据请求成功');
 

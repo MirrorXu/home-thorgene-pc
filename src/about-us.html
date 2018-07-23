@@ -144,28 +144,30 @@ function IsPC(){
             </div>
         </div>
     </div>
-    <div class="about-professor">
-        <div class="banxin">
-            <h2 class="title">专家团队</h2>
-        </div>
-        <div class="professor-show">
-            <ul class="banxin professor-show-items clearfix">
-                <li v-for=" v in professor" @click="changeTempProfessor(v.name)">
-                    <div class="mask-box " :class="{'bgBlue':tempProfessor[0].name == v.name }"></div>
-                    <img :src="v.img" :alt="v.name">
-                    <h3>{{ v.name }}</h3>
-                    <p>{{ v.title }}</p>
-                </li>
-            </ul>
-        </div>
-        <div class=" professor-show-box" >
-            <div class="banxin" v-for=" v  in  tempProfessor ">
-                <h3>{{ v.name }}</h3>
-                <p>{{ v.text }}</p>
-            </div>
-        </div>
 
-    </div>
+    <div style="height: 100px"></div>
+    <!--<div class="about-professor">-->
+        <!--<div class="banxin">-->
+            <!--<h2 class="title">专家团队</h2>-->
+        <!--</div>-->
+        <!--<div class="professor-show">-->
+            <!--<ul class="banxin professor-show-items clearfix">-->
+                <!--<li v-for=" v in professor" @click="changeTempProfessor(v.name)">-->
+                    <!--<div class="mask-box " :class="{'bgBlue':tempProfessor[0].name == v.name }"></div>-->
+                    <!--<img :src="v.img" :alt="v.name">-->
+                    <!--<h3>{{ v.name }}</h3>-->
+                    <!--<p>{{ v.title }}</p>-->
+                <!--</li>-->
+            <!--</ul>-->
+        <!--</div>-->
+        <!--<div class=" professor-show-box" >-->
+            <!--<div class="banxin" v-for=" v  in  tempProfessor ">-->
+                <!--<h3>{{ v.name }}</h3>-->
+                <!--<p>{{ v.text }}</p>-->
+            <!--</div>-->
+        <!--</div>-->
+
+    <!--</div>-->
 </div>
 
 
